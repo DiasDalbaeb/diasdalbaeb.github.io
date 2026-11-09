@@ -3,10 +3,206 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>boba</title>
+  <title>diasdalbaeb.kz</title>
+  <meta name="description" content="Личный сайт">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0c;
+      --text: #ece8e1;
+      --muted: #8a8580;
+      --line: rgba(236, 232, 225, 0.12);
+      --accent: #d9a46a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { height: 100%; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", system-ui, sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+    
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(60% 50% at 50% 0%, rgba(217, 164, 106, 0.14), transparent 70%),
+        radial-gradient(40% 40% at 85% 90%, rgba(120, 110, 200, 0.08), transparent 70%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 28px clamp(20px, 5vw, 64px);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    header .logo { color: var(--text); font-weight: 500; }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: clamp(32px, 8vh, 96px) 20px 64px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      font-size: 13px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: rise 0.9s ease forwards 0.1s;
+    }
+
+    h1 {
+      font-family: "Instrument Serif", Georgia, serif;
+      font-weight: 400;
+      font-size: clamp(48px, 10vw, 120px);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      max-width: 14ch;
+      opacity: 0;
+      animation: rise 1s ease forwards 0.25s;
+    }
+
+    h1 em { font-style: italic; color: var(--accent); }
+
+    .lead {
+      margin-top: 24px;
+      max-width: 46ch;
+      color: var(--muted);
+      font-size: clamp(16px, 2vw, 18px);
+      opacity: 0;
+      animation: rise 1s ease forwards 0.45s;
+    }
+
+    figure {
+      margin-top: clamp(48px, 8vh, 80px);
+      width: min(560px, 100%);
+      opacity: 0;
+      animation: rise 1.2s ease forwards 0.65s;
+    }
+
+    .frame {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      box-shadow:
+        0 40px 80px -20px rgba(0, 0, 0, 0.8),
+        0 0 120px -40px rgba(217, 164, 106, 0.35);
+      background: linear-gradient(160deg, #1c1a1f, #121114);
+    }
+
+    .frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.9) contrast(1.05);
+      transition: transform 1.2s ease;
+    }
+
+    .frame:hover img { transform: scale(1.03); }
+
+    .placeholder {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 14px;
+      padding: 24px;
+    }
+
+    .frame.no-photo .placeholder { display: flex; }
+    .frame.no-photo img { display: none; }
+
+    figcaption {
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    footer {
+      padding: 28px clamp(20px, 5vw, 64px);
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .eyebrow, h1, .lead, figure { animation: none; opacity: 1; }
+      .frame img { transition: none; }
+    }
+  </style>
 </head>
 <body>
-  <h1>abob</h1>
-  <p>Скоро здесь будет больше.</p>
+
+  <header>
+    <span class="logo">diasdalbaeb.kz</span>
+    <span>Алматы</span>
+  </header>
+
+  <main>
+    <p class="eyebrow">Добро пожаловать</p>
+
+    <h1>Привет, тут будут <em>пруфы</em></h1>
+
+    <p class="lead">
+      dias
+    </p>
+
+    <figure>
+      <div class="frame" id="frame">
+        <img src="diasdalbaeb1.jpg" alt="Фотография" onerror="document.getElementById('frame').classList.add('no-photo')">
+        <div class="placeholder"></div>
+      </div>
+      <figcaption>diasdalbaeb1</figcaption>
+    </figure>
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> diasdalbaeb.kz</span>
+    <span>dalbaeb</span>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
