@@ -15,11 +15,10 @@
       --muted: #8a8580;
       --line: rgba(236, 232, 225, 0.12);
       --accent: #d9a46a;
+      --gutter: clamp(16px, 5vw, 64px);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html, body { height: 100%; }
 
     body {
       background: var(--bg);
@@ -32,7 +31,7 @@
       flex-direction: column;
       overflow-x: hidden;
     }
-    
+
     body::before {
       content: "";
       position: fixed;
@@ -48,7 +47,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 28px clamp(20px, 5vw, 64px);
+      gap: 16px;
+      padding: 24px var(--gutter);
       font-size: 13px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -62,16 +62,16 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: clamp(32px, 8vh, 96px) 20px 64px;
+      padding: clamp(24px, 8vh, 96px) var(--gutter) 64px;
       text-align: center;
     }
 
     .eyebrow {
-      font-size: 13px;
+      font-size: 12px;
       letter-spacing: 0.25em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       opacity: 0;
       animation: rise 0.9s ease forwards 0.1s;
     }
@@ -79,10 +79,11 @@
     h1 {
       font-family: "Instrument Serif", Georgia, serif;
       font-weight: 400;
-      font-size: clamp(48px, 10vw, 120px);
+      font-size: clamp(44px, 10vw, 120px);
       line-height: 0.95;
       letter-spacing: -0.02em;
       max-width: 14ch;
+      overflow-wrap: break-word;
       opacity: 0;
       animation: rise 1s ease forwards 0.25s;
     }
@@ -90,7 +91,7 @@
     h1 em { font-style: italic; color: var(--accent); }
 
     .lead {
-      margin-top: 24px;
+      margin-top: 20px;
       max-width: 46ch;
       color: var(--muted);
       font-size: clamp(16px, 2vw, 18px);
@@ -98,12 +99,23 @@
       animation: rise 1s ease forwards 0.45s;
     }
 
-    figure {
-      margin-top: clamp(48px, 8vh, 80px);
-      width: min(560px, 100%);
-      opacity: 0;
-      animation: rise 1.2s ease forwards 0.65s;
+    /* Галерея: на ПК два фото рядом, на телефоне одно под другим */
+    .gallery {
+      margin-top: clamp(40px, 8vh, 80px);
+      width: 100%;
+      max-width: 1040px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(20px, 3vw, 40px);
     }
+
+    figure {
+      opacity: 0;
+      animation: rise 1.2s ease forwards;
+    }
+
+    figure:nth-child(1) { animation-delay: 0.65s; }
+    figure:nth-child(2) { animation-delay: 0.85s; }
 
     .frame {
       position: relative;
@@ -128,6 +140,7 @@
 
     .frame:hover img { transform: scale(1.03); }
 
+    /* заглушка, если файл фото не найден */
     .placeholder {
       position: absolute;
       inset: 0;
@@ -143,14 +156,14 @@
     .frame.no-photo img { display: none; }
 
     figcaption {
-      margin-top: 16px;
+      margin-top: 14px;
       font-size: 13px;
       color: var(--muted);
       letter-spacing: 0.04em;
     }
 
     footer {
-      padding: 28px clamp(20px, 5vw, 64px);
+      padding: 24px var(--gutter);
       border-top: 1px solid var(--line);
       display: flex;
       justify-content: space-between;
@@ -163,6 +176,16 @@
     @keyframes rise {
       from { opacity: 0; transform: translateY(16px); }
       to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Телефоны и узкие экраны */
+    @media (max-width: 700px) {
+      .gallery {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+      }
+      .frame { border-radius: 16px; }
+      header, footer { font-size: 12px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -187,13 +210,25 @@
       dias
     </p>
 
-    <figure>
-      <div class="frame" id="frame">
-        <img src="diasdalbaeb1.jpg" alt="Фотография" onerror="document.getElementById('frame').classList.add('no-photo')">
-        <div class="placeholder"></div>
-      </div>
-      <figcaption>diasdalbaeb1</figcaption>
-    </figure>
+    <section class="gallery">
+      <figure>
+        <div class="frame">
+          <img src="diasdalbaeb1.jpg" alt="Фотография 1" loading="lazy"
+               onerror="this.parentElement.classList.add('no-photo')">
+          <div class="placeholder">Нет файла diasdalbaeb1.jpg</div>
+        </div>
+        <figcaption>diasdalbaeb1</figcaption>
+      </figure>
+
+      <figure>
+        <div class="frame">
+          <img src="diasdalbaeb2.jpg" alt="Фотография 2" loading="lazy"
+               onerror="this.parentElement.classList.add('no-photo')">
+          <div class="placeholder">Нет файла diasdalbaeb2.jpg</div>
+        </div>
+        <figcaption>diasdalbaeb2</figcaption>
+      </figure>
+    </section>
   </main>
 
   <footer>
